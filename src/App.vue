@@ -1,8 +1,11 @@
 <script setup>
 import Header from "./components/Header.vue";
+import Balance from "./components/Balance.vue";
 </script>
 
 <template>
   <Header />
-  <div class="container"></div>
+  <div class="container">
+    <Balance />
+  </div>
 </template>
