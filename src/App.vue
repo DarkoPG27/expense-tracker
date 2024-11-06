@@ -79,6 +79,17 @@ const handleTransactionSumbitted = (transactionData) => {
     });
   }
 };
+
+//Delete Transaction
+const handleTransactionDeleted = (id) => {
+  transactions.value = transactions.value.filter(
+    (transactions) => transactions.id !== id
+  );
+  toast("Transaction Deleted!", {
+    theme: "colored",
+    type: "success",
+  });
+};
 </script>
 
 <template>
@@ -86,7 +97,10 @@ const handleTransactionSumbitted = (transactionData) => {
   <div class="container">
     <Balance :total="+total" />
     <IncomeExpenses :income="+income" :expenses="+expenses" />
-    <TransactionList :transactions="transactions" />
+    <TransactionList
+      :transactions="transactions"
+      @transactionDeleted="handleTransactionDeleted"
+    />
     <AddTransaction @transactionSubmitted="handleTransactionSumbitted" />
   </div>
 </template>
