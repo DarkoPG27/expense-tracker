@@ -5,6 +5,8 @@ import IncomeExpenses from "./components/IncomeExpenses.vue";
 import TransactionList from "./components/TransactionList.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 
+import { toast } from "vue3-toastify";
+
 import { computed, ref } from "vue";
 
 const transactions = ref([
@@ -57,9 +59,25 @@ const expenses = computed(() => {
     .toFixed(2);
 });
 
-//handle transaction
-const handleTransactionSumbitted = () => {
-  alert("submited");
+//Generate Uniqe Id
+const generateUniqeId = () => {
+  return Math.floor(Math.random() * 1000000);
+};
+
+//Add Transaction
+const handleTransactionSumbitted = (transactionData) => {
+  transactions.value.push({
+    id: generateUniqeId(),
+    text: transactionData.text,
+    amount: transactionData.amount,
+  });
+
+  if (transactionData.text && transactionData.amount) {
+    toast("Transaction Added!", {
+      theme: "colored",
+      type: "success",
+    });
+  }
 };
 </script>
 
