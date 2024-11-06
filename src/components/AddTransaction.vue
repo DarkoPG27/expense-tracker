@@ -1,11 +1,29 @@
 <script setup>
 import { ref } from "vue";
+import { toast } from "vue3-toastify";
 
 const text = ref("");
 const amount = ref("");
 
+const emit = defineEmits(["transactionSubmitted"]);
+
 const onSubmit = () => {
-  alert(amount.value);
+  if (!text.value || !amount.value) {
+    toast("Both fields must be filled!", {
+      theme: "colored",
+      type: "error",
+    });
+  }
+
+  const transactionData = {
+    text: text.value,
+    amount: parseFloat(amount.value),
+  };
+
+  emit("transactionSubmitted", transactionData);
+
+  text.value = "";
+  amount.value = "";
 };
 </script>
 

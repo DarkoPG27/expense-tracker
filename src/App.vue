@@ -56,14 +56,19 @@ const expenses = computed(() => {
     }, 0)
     .toFixed(2);
 });
+
+//handle transaction
+const handleTransactionSumbitted = () => {
+  alert("submited");
+};
 </script>
 
 <template>
   <Header />
   <div class="container">
-    <Balance :total="total" />
+    <Balance :total="+total" />
     <IncomeExpenses :income="+income" :expenses="+expenses" />
     <TransactionList :transactions="transactions" />
-    <AddTransaction />
+    <AddTransaction @transactionSubmitted="handleTransactionSumbitted" />
   </div>
 </template>
